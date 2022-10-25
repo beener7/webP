@@ -1,4 +1,13 @@
 <?php
+	
+	$number = $_POST['number'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$email = $_POST['email'];
+	$site = $_POST['site'];
+	$field = $_POST['field'];
+    $introduce = $_POST['introduce'];
+	
 
 	echo "<h3>■ mysqli_connect 함수 사용</h3>";
 	echo "<hr>";
@@ -8,7 +17,7 @@
 	$db_passwd = "";
 	
 	$conn = mysqli_connect($db_host, $db_user, $db_passwd);   // mysql 관리자 계정으로 접속
-	$db = mysqli_select_db($conn, 'teamP');
+	$db = mysqli_select_db($conn, 'test_db');
 
 	if($conn)
 	{
@@ -28,7 +37,7 @@
 	if($db)
 	{
 		echo " ★ 데이터베이스 선택 성공 ..... <br><br>";
-		echo " ..... 선택한 데이터베이스는 <B> 'teamP' </B>입니다.<br><br>";
+		echo " ..... 선택한 데이터베이스는 <B> 'test_db' </B>입니다.<br><br>";
 		echo "<hr>";
 	} 
 	else 
@@ -44,16 +53,9 @@
 	mysqli_query($conn, "set session character_set_results=utf8;");		 
 	mysqli_query($conn, "set session character_set_client=utf8;");	
 
-	$sql = "INSERT INTO Users VALUES
-	       ($_POST[username], $_POST[username], $_POST[password], $_POST[email],NULL,$_POST[introduce],NULL,$_POST[site],NULL,$_POST[field])";
+	$sql = "INSERT INTO Users(id,username,password,email,avatar,introduction,site,field)
+						VALUES('$number','$username','$password','$email',NULL,'$introduce','$site','$field')";
 	mysqli_query($conn, $sql);
-
-
-	echo " o 아이디 .................. <B>{$_POST['username']} </B><br>" ;
-	echo " o 성명 ................... <B>{$_POST['password']} </B><br><hr>";
-	echo " o 비밀번호 ................. <B>{$_POST['email']} </B><br>";
-	echo " o 비밀번호 확인 .............. <B>{$_POST['introduce']} </B><br><hr>";
-	echo " o 성별 ................... <B>{$_POST['site']} </B><br><hr>";
 
 
 
